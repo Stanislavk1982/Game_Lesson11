@@ -80,8 +80,9 @@ public class Board {
     public void gameWinner() {
         System.out.println("The winner is: Player " + Winner);
     }
-public void currentPlayerMove() {
-    System.out.println("Players " + currentPlayer + " moves");
-    System.out.print("Enter you moves");
-}
+
+    public void currentPlayerMove() {
+        System.out.println("Players " + currentPlayer + " moves");
+        System.out.print("Enter you moves");
+    }
 }
