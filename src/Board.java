@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class Board {
     private char[][] board = new char[3][3];
     private char currentPlayer;
-    private char Winner = ' ';
+    private char winner = ' ';
 
     public Board() {
         for (int i = 0; i < 3; i++) {
@@ -78,7 +78,7 @@ public class Board {
     }
 
     public void gameWinner() {
-        System.out.println("The winner is: Player " + Winner);
+        System.out.println("The winner is: Player " + winner);
     }
 
     public void currentPlayerMove() {
