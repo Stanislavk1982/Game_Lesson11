@@ -1,16 +1,19 @@
-import java.sql.Array;
 import java.util.Arrays;
 
 public class Board {
     private char[][] board = new char[3][3];
-    private char currentPlayer;
-    private char winner = ' ';
+    private Player playerX;
+    private Player player0;
+    private Player currentPlayer;
+    private Player winner, looser;
 
-    public Board() {
+    public Board(Player playerX, Player player0) {
         for (int i = 0; i < 3; i++) {
             Arrays.fill(board[i], ' ');
         }
-        currentPlayer = 'X';
+        this.player0 = player0;
+        this.playerX = playerX;
+        currentPlayer = playerX;
     }
 
     public void printBoard() {
@@ -34,7 +37,7 @@ public class Board {
         if (!isMoveValid(x, y)) {
             return false;
         }
-        board[x][y] = currentPlayer;
+        board[x][y] = currentPlayer.getType();
         changeCurrentPlayer();
         return true;
 
@@ -48,41 +51,64 @@ public class Board {
     }
 
     private void changeCurrentPlayer() {
-        if (currentPlayer == 'X') {
-            currentPlayer = '0';
+        if (currentPlayer.getType() == 'X') {
+            currentPlayer = player0;
         } else {
-            currentPlayer = 'X';
+            currentPlayer = playerX;
         }
     }
 
     public boolean gameFinished() {
         for (int i = 0; i < 3; i++) {
             if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ') {
-                Winner = board[i][0];
+
+                calaculateWin(board[i][0]);
                 return true;
             }
             if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != ' ') {
-                Winner = board[0][i];
+                calaculateWin(board[0][i]);
                 return true;
             }
         }
         if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != ' ') {
-            Winner = board[0][0];
+            calaculateWin(board[0][0]);
             return true;
         }
         if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != ' ') {
-            Winner = board[0][2];
+            calaculateWin(board[0][2]);
             return true;
         }
         return false;
     }
 
-    public void gameWinner() {
-        System.out.println("The winner is: Player " + winner);
+    public Player gameWinner() {
+        return winner;
+    }
+    public Player gameLooser() {
+        return looser;
+    }
+
+    public void calaculateWin(char type) {
+        if (type == 'X') {
+            winner = playerX;
+            looser = player0;
+
+        } else {
+            winner = player0;
+            looser = playerX;
+        }
+
     }
 
     public void currentPlayerMove() {
         System.out.println("Players " + currentPlayer + " moves");
         System.out.print("Enter you moves");
+    }
+    public void winAndStatistic(Statistic statistic) {
+        System.out.println("The winner is: " + gameWinner());
+        GAmeResult resultWinner = new GAmeResult(gameWinner(), "winner");
+        GAmeResult resultLooser = new GAmeResult(gameLooser(), "looser");
+        statistic.addResult(resultWinner);
+        statistic.addResult(resultLooser);
     }
 }
