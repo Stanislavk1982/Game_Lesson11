@@ -28,18 +28,21 @@ public class Board {
         System.out.println(" └──┴──┴──┘");
     }
 
-    public boolean makeMove(String move) {
+    public void makeMove(String move) {
         if (move.length() != 2) {
-            return false;
+            System.out.println("Yiu enter incorrect coordinates");
+            //return false;
         }
         int x = Character.getNumericValue(move.charAt(0));
         int y = Character.getNumericValue(move.charAt(1));
         if (!isMoveValid(x, y)) {
-            return false;
+            System.out.println("Error, you enter incorrect coordinates or field is busy");
+
+            //return false;
         }
         board[x][y] = currentPlayer.getType();
         changeCurrentPlayer();
-        return true;
+        //return true;
 
     }
 
@@ -104,10 +107,10 @@ public class Board {
         System.out.println("Players " + currentPlayer + " moves");
         System.out.print("Enter you moves");
     }
-    public void winAndStatistic(Statistic statistic) {
+    public void winAndAddStatistic(Statistic statistic) {
         System.out.println("The winner is: " + gameWinner());
-        GAmeResult resultWinner = new GAmeResult(gameWinner(), "winner");
-        GAmeResult resultLooser = new GAmeResult(gameLooser(), "looser");
+        GameResult resultWinner = new GameResult(gameWinner(), "winner");
+        GameResult resultLooser = new GameResult(gameLooser(), "looser");
         statistic.addResult(resultWinner);
         statistic.addResult(resultLooser);
     }

@@ -16,19 +16,14 @@ public class Game {
             while (!board.gameFinished()) {
                 board.currentPlayerMove();
                 String move = scanner.next();
-                if (!board.makeMove(move)) {
-                    System.out.println("Error, you enter incorect coordinates or field is busy");
-                }
+                board.makeMove(move);
                 board.printBoard();
             }
-            board.winAndStatistic(statistic);
+            board.winAndAddStatistic(statistic);
             System.out.println("Do you play again?");
             input = scanner.next();
         }
-        System.out.println(statistic.toString());
-        System.out.println("What statistic you want?");
-        input = scanner.next();
-        statistic.viewS(input);
+        statistic.viewStatistics();
 
     }
 }

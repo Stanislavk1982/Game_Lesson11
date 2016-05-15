@@ -1,16 +1,20 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Statistic {
-    private List<GAmeResult> results = new ArrayList<GAmeResult>();
+    private List<GameResult> results = new ArrayList<GameResult>();
+    Scanner scanner= new Scanner(System.in);
 
-    public void addResult(GAmeResult result) {
+    public void addResult(GameResult result) {
         results.add(result);
     }
 
-    public void viewS(String game) {
-        for (GAmeResult tempresult : results) {
-            if (tempresult.returnResult() == game ) {
+    public void viewStatistics() {
+        System.out.println("What statistic you want?");
+        String input = scanner.next();
+        for (GameResult tempresult : results) {
+            if (tempresult.returnResult().equals(input)) {
                 System.out.println(tempresult);
             }
         }
