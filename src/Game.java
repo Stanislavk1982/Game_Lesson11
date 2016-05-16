@@ -23,7 +23,8 @@ public class Game {
             System.out.println("Do you play again?");
             input = scanner.next();
         }
-        statistic.viewStatistics();
+     //   statistic.viewStatistics();
+        System.out.println(statistic);
 
     }
 }
