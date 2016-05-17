@@ -6,24 +6,24 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Start the Game?");
         String input = scanner.next();
-
         while (!input.equals("exit")) {
             System.out.println("Let's play game");
-            Player playerX = new Player("Ivanov", "Ivan", "Ivanovich", 25, 'X');
-            Player playerO = new Player("Petrov", "Petr", "Petrovich", 35, '0');
-            Board board = new Board(playerX, playerO);
+
+            //Player playerX = new Human("Ivanov", "Ivan", "Ivanovich", 25);
+            //Player playerO = new AI("Petrov", "Petr", "Petrovich", 35);
+            Board board = new Board();
+            board.enterPlayer();
             board.printBoard();
             while (!board.gameFinished()) {
                 board.currentPlayerMove();
-                String move = scanner.next();
-                board.makeMove(move);
+                board.makeMove();
                 board.printBoard();
             }
             board.winAndAddStatistic(statistic);
             System.out.println("Do you play again?");
             input = scanner.next();
         }
-     //   statistic.viewStatistics();
+
         System.out.println(statistic);
 
     }

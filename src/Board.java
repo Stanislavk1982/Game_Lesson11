@@ -6,14 +6,15 @@ public class Board {
     private Player player0;
     private Player currentPlayer;
     private Player winner, looser;
+    private int x, y;
 
-    public Board(Player playerX, Player player0) {
+    public Board() {
         for (int i = 0; i < 3; i++) {
             Arrays.fill(board[i], ' ');
         }
-        this.player0 = player0;
-        this.playerX = playerX;
-        currentPlayer = playerX;
+        //this.player0 = player0;
+        //this.playerX = playerX;
+        //currentPlayer = playerX;
     }
 
     public void printBoard() {
@@ -28,26 +29,47 @@ public class Board {
         System.out.println(" └──┴──┴──┘");
     }
 
-    public void makeMove(String move) {
-        if (move.length() != 2) {
-            System.out.println("Yiu enter incorrect coordinates");
-            //return false;
-        }
-        int x = Character.getNumericValue(move.charAt(0));
-        int y = Character.getNumericValue(move.charAt(1));
+    public void enterPlayer() {
+        Player playerX = new Human("Ivanov", "Ivan", "Ivanovich", 25);
+        Player playerO = new AI("Petrov", "Petr", "Petrovich");
+        this.player0 = playerO;
+        this.playerX = playerX;
+        currentPlayer = playerX;
+
+    }
+
+    public void enterCoordinates() {
+        String move = currentPlayer.makeMove();
+        this.x = Character.getNumericValue(move.charAt(0));
+        this.y = Character.getNumericValue(move.charAt(1));
+
+    }
+
+    public void makeMove() {
+
+        do {
+            enterCoordinates();
+        } while (!isMoveValid(x, y));
+
+/*       String move = currentPlayer.makeMove();
+       int x = Character.getNumericValue(move.charAt(0));
+       int y = Character.getNumericValue(move.charAt(1));
         if (!isMoveValid(x, y)) {
             System.out.println("Error, you enter incorrect coordinates or field is busy");
-
+              makeMove();
+            break
             //return false;
         }
+*/
         board[x][y] = currentPlayer.getType();
         changeCurrentPlayer();
-        //return true;
+
 
     }
 
     private boolean isMoveValid(int x, int y) {
-        if (x > 2 || x < 0 || y > 2 || y < 0 || board[x][y] == 'X' || board[x][y] == '0') {
+        if (x > 2 || x < 0 || y > 2 || y < 0 || board[x][y] == 'X' || board[x][y] == 'O') {
+            System.out.println("Enter correct coordinates");
             return false;
         }
         return true;
@@ -87,6 +109,7 @@ public class Board {
     public Player gameWinner() {
         return winner;
     }
+
     public Player gameLooser() {
         return looser;
     }
@@ -107,6 +130,7 @@ public class Board {
         System.out.println("Players " + currentPlayer + " moves");
         System.out.print("Enter you moves");
     }
+
     public void winAndAddStatistic(Statistic statistic) {
         System.out.println("The winner is: " + gameWinner());
         GameResult resultWinner = new GameResult(gameWinner(), "winner");
