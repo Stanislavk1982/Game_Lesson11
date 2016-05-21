@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Game {
     public static void main(String[] args) {
-        Statistic statistic = new Statistic();
+        Statistic statistic = Statistic.newInstance();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Start the Game?");
         String input = scanner.next();

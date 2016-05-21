@@ -23,4 +23,20 @@ public class GameResult {
     public String toString() {
         return player.toString() + " " + date.toString();
     }
+
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj.getClass() != GameResult.class) {
+            return false;
+        }
+
+        GameResult gameResult = (GameResult) obj;
+
+        if (this.player == gameResult.player && this.result == gameResult.result && this.date == gameResult.date) {
+            return true;
+        }
+        return false;
+    }
 }

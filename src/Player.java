@@ -6,16 +6,19 @@ public abstract class Player {
     private char type;
 
     public Player(String name, String lastName) {
-        this(name,lastName,"Ivanovich");
+        this(name, lastName, "Ivanovich");
 
     }
-    public Player (String name, String lastName, String middleName) {
+
+    public Player(String name, String lastName, String middleName) {
         this(name, lastName, middleName, 25);
     }
+
     Player(String name, String lastName, String middleName, int age) {
         this(name, lastName, middleName, age, 'X');
 
     }
+
     Player(String name, String lastName, String middleName, int age, char type) {
         this.name = name;
         this.lastName = lastName;
@@ -69,6 +72,27 @@ public abstract class Player {
     }
 
     public abstract String makeMove();
+
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj.getClass() != Player.class) {
+            return false;
+        }
+        if (this.name == null || this.lastName == null || this.middleName == null || this.age == 0) {
+            return false;
+        }
+        Player player = (Player) obj;
+        if (this.name.equals(player.name) &&
+                this.lastName.equals(player.lastName) &&
+                this.middleName.equals(player.middleName) &&
+                this.age == player.age) {
+            return true;
+        }
+        return false;
+    }
 
 
 }

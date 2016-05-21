@@ -32,6 +32,7 @@ public class Board {
     public void enterPlayer() {
         Player playerX = new Human("Ivanov", "Ivan", "Ivanovich", 25);
         Player playerO = new AI("Petrov", "Petr", "Petrovich");
+
         this.player0 = playerO;
         this.playerX = playerX;
         currentPlayer = playerX;

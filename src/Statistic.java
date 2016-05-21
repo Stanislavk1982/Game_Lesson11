@@ -3,8 +3,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Statistic {
+
+    private static Statistic statistic = null;
     private List<GameResult> results = new ArrayList<GameResult>();
     Scanner scanner = new Scanner(System.in);
+
+    private Statistic() {
+
+    }
 
     public void addResult(GameResult result) {
         results.add(result);
@@ -18,18 +24,15 @@ public class Statistic {
         for (GameResult tempresult : results) {
             if (tempresult.returnResult().equals(input)) {
                 statisticOut = statisticOut + "\n" + tempresult;
-
-                //System.out.println(tempresult);
             }
-
         }
         return statisticOut;
-        //GAmeResult gAmeResult1 = results.get(0);
-        //System.out.println(gAmeResult1.returnPlayer());
-        //gAmeResult1=results.get(1);
-        //System.out.println(gAmeResult1.returnPlayer());
-        //System.out.println(gAmeResult1.toString());
-
     }
 
+    public static Statistic newInstance() {
+        if (statistic == null) {
+            statistic = new Statistic();
+        }
+        return statistic;
+    }
 }
