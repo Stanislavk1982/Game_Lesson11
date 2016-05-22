@@ -34,7 +34,8 @@ public class GameResult {
 
         GameResult gameResult = (GameResult) obj;
 
-        if (this.player == gameResult.player && this.result == gameResult.result && this.date == gameResult.date) {
+        if (this.player.equals(gameResult.player) && this.result.equals(gameResult.result))
+        {
             return true;
         }
         return false;

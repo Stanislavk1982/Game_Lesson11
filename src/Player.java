@@ -77,15 +77,12 @@ public abstract class Player {
         if (obj == null) {
             return false;
         }
-
-        if (obj.getClass() != Player.class) {
-            return false;
-        }
         if (this.name == null || this.lastName == null || this.middleName == null || this.age == 0) {
             return false;
         }
         Player player = (Player) obj;
-        if (this.name.equals(player.name) &&
+        if (obj instanceof Player &&
+                this.name.equals(player.name) &&
                 this.lastName.equals(player.lastName) &&
                 this.middleName.equals(player.middleName) &&
                 this.age == player.age) {
