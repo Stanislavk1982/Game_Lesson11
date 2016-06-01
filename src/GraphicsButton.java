@@ -2,166 +2,71 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
 
 public class GraphicsButton extends JPanel {
 
     private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JButton button5;
-    private JButton button6;
-    private JButton button7;
-    private JButton button8;
-    private JButton button9;
+    private Board2 board2;
+    private List<JButton> buttons;
+    private JTextArea textArea;
 
-    public JButton getButton1() {
-        return button1;
-    }
+    public GraphicsButton(Board2 board2, List<JButton> buttons, JTextArea textArea) {
 
-    public void setButton1(JButton button1) {
-        this.button1 = button1;
-    }
 
-    public JButton getButton2() {
-        return button2;
-    }
-
-    public void setButton2(JButton button2) {
-        this.button2 = button2;
-    }
-
-    public JButton getButton3() {
-        return button3;
-    }
-
-    public void setButton3(JButton button3) {
-        this.button3 = button3;
-    }
-
-    public JButton getButton4() {
-        return button4;
-    }
-
-    public void setButton4(JButton button4) {
-        this.button4 = button4;
-    }
-
-    public JButton getButton5() {
-        return button5;
-    }
-
-    public void setButton5(JButton button5) {
-        this.button5 = button5;
-    }
-
-    public JButton getButton6() {
-        return button6;
-    }
-
-    public void setButton6(JButton button6) {
-        this.button6 = button6;
-    }
-
-    public JButton getButton7() {
-        return button7;
-    }
-
-    public void setButton7(JButton button7) {
-        this.button7 = button7;
-    }
-
-    public JButton getButton8() {
-        return button8;
-    }
-
-    public void setButton8(JButton button8) {
-        this.button8 = button8;
-    }
-
-    public JButton getButton9() {
-        return button9;
-    }
-
-    public void setButton9(JButton button9) {
-        this.button9 = button9;
-    }
-
-    public GraphicsButton() {
+        this.board2 = board2;
+        this.buttons = buttons;
+        this.textArea=textArea;
+        board2.enterPlayer();
         Dimension dimension = new Dimension();
         dimension.height = 100;
         dimension.width = 100;
 
-        button1 = new JButton("");
-        button1.setPreferredSize(dimension);
-        button2 = new JButton("");
-        button2.setPreferredSize(dimension);
-        button3 = new JButton("");
-        button3.setPreferredSize(dimension);
-        button4 = new JButton("");
-        button4.setPreferredSize(dimension);
-        button5 = new JButton("");
-        button5.setPreferredSize(dimension);
-        button6 = new JButton("");
-        button6.setPreferredSize(dimension);
-        button7 = new JButton("");
-        button7.setPreferredSize(dimension);
-        button8 = new JButton("");
-        button8.setPreferredSize(dimension);
-        button9 = new JButton("");
-        button9.setPreferredSize(dimension);
-
         LayoutManager layoutManager = new GridBagLayout();
         setLayout(layoutManager);
-
         GridBagConstraints gc = new GridBagConstraints();
-        gc.gridx = 0;
-        gc.gridy = 0;
-        add(button1, gc);
 
-        gc.gridx = 1;
-        gc.gridy = 0;
-        add(button2, gc);
+        for (int i = 0; i < 9; i++) {
+            JButton button = new JButton("");
+            button.setPreferredSize(dimension);
+            int x = i / 3;
+            int y = i % 3;
+            gc.gridx = x;
+            gc.gridy = y;
+            button.setName(String.valueOf(x) + String.valueOf(y));
+            add(button, gc);
 
-        gc.gridx = 2;
-        gc.gridy = 0;
-        add(button3, gc);
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton btn = (JButton) e.getSource();
+                    String move = btn.getName();
+                    char type = board2.getCurrentPlayer().getType();
+                    //board2.printBoard();
+                    if (board2.makeMove(move)) {
+                        btn.setText(String.valueOf(type));
+                    }
 
-        gc.gridx = 0;
-        gc.gridy = 1;
-        add(button4, gc);
-
-        gc.gridx = 1;
-        gc.gridy = 1;
-        add(button5, gc);
-
-        gc.gridx = 2;
-        gc.gridy = 1;
-        add(button6, gc);
-
-        gc.gridx = 0;
-        gc.gridy = 2;
-        add(button7, gc);
-
-        gc.gridx = 1;
-        gc.gridy = 2;
-        add(button8, gc);
-
-        gc.gridx = 2;
-        gc.gridy = 2;
-        add(button9, gc);
-
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                button1.setText("----");
-
-            }
-        });
+                    if (board2.gameFinished()) {
+                        if (board2.isDrow()) {
+                            System.out.println("Drow");
+                            textArea.setText("DROW");
+                            board2.clear();
+                        } else {
+                            System.out.println("Winner" + board2.getWinner());
+                            System.out.println("Winner" + board2.getLooser());
+                            textArea.setText("Winner is: " + board2.getWinner().toString()+"\n Looser: "+board2.getLooser().toString());
+                            textArea.append("------------------------");
+                                                        board2.clear();
+                            JOptionPane.showMessageDialog(null,"New Game");
+                        }
+                    }
+                }
+            });
+            buttons.add(button);
+        }
 
     }
 
-    public void but2(String str) {
-        button2.setText(str);
-    }
 }

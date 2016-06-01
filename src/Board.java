@@ -1,4 +1,6 @@
+import javax.swing.*;
 import java.util.Arrays;
+import java.util.List;
 
 public class Board {
     private char[][] board = new char[3][3];
@@ -7,11 +9,13 @@ public class Board {
     private Player currentPlayer;
     private Player winner, looser;
     private int x, y;
+    private List<JButton> buttons;
 
     public Board() {
         for (int i = 0; i < 3; i++) {
             Arrays.fill(board[i], ' ');
         }
+        Statistic statistic = Statistic.newInstance();
         //this.player0 = player0;
         //this.playerX = playerX;
         //currentPlayer = playerX;
@@ -30,8 +34,8 @@ public class Board {
     }
 
     public void enterPlayer() {
-        Player playerX = new Human("Ivanov", "Ivan", "Ivanovich", 25);
-        Player playerO = new AI("Petrov", "Petr", "Petrovich");
+        Player playerX = new Human("Ivanov", "Ivan", "Ivanovich", 25, 'X');
+        Player playerO = new AI("Petrov", "Petr", "Petrovich",35,'O');
 
         this.player0 = playerO;
         this.playerX = playerX;
@@ -85,6 +89,7 @@ public class Board {
     }
 
     public boolean gameFinished() {
+
         for (int i = 0; i < 3; i++) {
             if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ') {
 

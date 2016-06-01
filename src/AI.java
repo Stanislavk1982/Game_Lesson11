@@ -7,8 +7,8 @@ public class AI extends Player {
     AI(String name, String lastName, String middleName) {
         super(name, lastName, middleName, 25);
     }
-    AI(String name, String lastName, String middleName, int age) {
-        super(name, lastName, middleName, age, 'O');
+    AI(String name, String lastName, String middleName, int age, char type) {
+        super(name, lastName, middleName, age, type);
     }
 
     @Override

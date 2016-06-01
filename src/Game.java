@@ -1,32 +1,7 @@
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Scanner;
 
 public class Game {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Graphics();
-                Graphics graph = new Graphics();
-                GraphicsButton gb = new GraphicsButton();
-                GraphicButtonStatistic gbStatistics = new GraphicButtonStatistic();
-                String out = "Test1111111111111111111";
-                JButton buttonWinner = gbStatistics.getButtonWinner();
-                buttonWinner.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        JTextArea textArea = graph.getTextArea();
-                        textArea.setText(out);
-                        graph.setTextArea(textArea);
-                        System.out.println("testCMD");
-
-                    }
-                });
-            }
-        });
-
         Statistic statistic = Statistic.newInstance();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Start the Game?");

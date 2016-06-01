@@ -17,12 +17,24 @@ public class Statistic {
     }
 
     //public void viewStatistics() {
-    public String toString() {
-        System.out.println("What statistic you want?");
-        String input = scanner.next(), statisticOut = "";
+    public String getWinner() {
+
+        String statisticOut = "";
 
         for (GameResult tempresult : results) {
-            if (tempresult.returnResult().equals(input)) {
+            if (tempresult.returnResult().equals("winner")) {
+                statisticOut = statisticOut + "\n" + tempresult;
+            }
+        }
+        return statisticOut;
+    }
+
+    public String getLooser() {
+
+        String statisticOut = "";
+
+        for (GameResult tempresult : results) {
+            if (tempresult.returnResult().equals("looser")) {
                 statisticOut = statisticOut + "\n" + tempresult;
             }
         }
