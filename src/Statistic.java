@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Statistic {
 
@@ -20,7 +18,7 @@ public class Statistic {
     public String getWinner() {
 
         String statisticOut = "";
-
+        Collections.sort(results);
         for (GameResult tempresult : results) {
             if (tempresult.returnResult().equals("winner")) {
                 statisticOut = statisticOut + "\n" + tempresult;
@@ -32,13 +30,24 @@ public class Statistic {
     public String getLooser() {
 
         String statisticOut = "";
-
+        Collections.sort(results);
+        System.out.println(results);
         for (GameResult tempresult : results) {
             if (tempresult.returnResult().equals("looser")) {
                 statisticOut = statisticOut + "\n" + tempresult;
             }
         }
         return statisticOut;
+    }
+
+    public String getAllGamers() {
+        Collections.sort(results, new Comparator<GameResult>() {
+            @Override
+            public int compare(GameResult o1, GameResult o2) {
+                return o1.returnPlayer().getName().compareTo(o2.returnPlayer().getName());
+            }
+        });
+        return results.toString();
     }
 
     public static Statistic newInstance() {

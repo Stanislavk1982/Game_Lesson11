@@ -30,14 +30,15 @@ public class Graphics extends JFrame {
         textArea = new JTextArea();
         Dimension textAreaSize = textArea.getPreferredSize();
 
-        textAreaSize.width = 300;
+        textAreaSize.width = 400;
         textAreaSize.height = 100;
+        textArea.setRows(10);
         textArea.setPreferredSize(textAreaSize);
 
         //board2.enterPlayer();
         List<JButton> list = new ArrayList<>();
         Statistic statistic = Statistic.newInstance();
-        Board2 board2 = new Board2(statistic,list);
+        Board2 board2 = new Board2(statistic, list);
         GraphicsButton gb = new GraphicsButton(board2, list, textArea);
         GraphicButtonStatistic gbStatistics = new GraphicButtonStatistic(list, textArea, board2, statistic);
         add(gb, BorderLayout.WEST);

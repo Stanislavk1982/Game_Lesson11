@@ -17,7 +17,7 @@ public class GraphicsButton extends JPanel {
 
         this.board2 = board2;
         this.buttons = buttons;
-        this.textArea=textArea;
+        this.textArea = textArea;
         board2.enterPlayer();
         Dimension dimension = new Dimension();
         dimension.height = 100;
@@ -56,10 +56,10 @@ public class GraphicsButton extends JPanel {
                         } else {
                             System.out.println("Winner" + board2.getWinner());
                             System.out.println("Winner" + board2.getLooser());
-                            textArea.setText("Winner is: " + board2.getWinner().toString()+"\n Looser: "+board2.getLooser().toString());
+                            textArea.setText("Winner is: " + board2.getWinner().toString() + "\n Looser: " + board2.getLooser().toString());
                             textArea.append("------------------------");
-                                                        board2.clear();
-                            JOptionPane.showMessageDialog(null,"New Game");
+                            board2.clear();
+                            JOptionPane.showMessageDialog(null, "New Game");
                         }
                     }
                 }

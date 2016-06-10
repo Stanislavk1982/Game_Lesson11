@@ -1,4 +1,4 @@
-public abstract class Player {
+public abstract class Player implements Comparable{
     private String name;
     private String lastName;
     private String middleName;
@@ -90,6 +90,7 @@ public abstract class Player {
         }
         return false;
     }
+
 
 
 }

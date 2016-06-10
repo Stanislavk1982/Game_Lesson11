@@ -8,6 +8,7 @@ public class GraphicButtonStatistic extends JPanel {
     private JButton buttonWinner = new JButton("Winner");
     private JButton buttonLoser = new JButton("Loser");
     private JButton buttonNewGame = new JButton("NewGame");
+    private JButton buttonAllGamers = new JButton("All Gamers");
 
     private List<JButton> buttons;
     private JTextArea textArea;
@@ -23,7 +24,7 @@ public class GraphicButtonStatistic extends JPanel {
     }
 
     public GraphicButtonStatistic(List<JButton> buttons, JTextArea textArea, Board2 board2, Statistic statistic) {
-        this.statistic=statistic;
+        this.statistic = statistic;
         this.board2 = board2;
         this.textArea = textArea;
         this.buttons = buttons;
@@ -33,6 +34,7 @@ public class GraphicButtonStatistic extends JPanel {
         add(buttonNewGame, layoutManager);
         add(buttonWinner, layoutManager);
         add(buttonLoser, layoutManager);
+        add(buttonAllGamers,layoutManager);
 
         buttonWinner.addActionListener(new ActionListener() {
             @Override
@@ -54,6 +56,13 @@ public class GraphicButtonStatistic extends JPanel {
                 for (JButton btn : buttons) {
                     btn.setText("");
                 }
+            }
+        });
+
+        buttonAllGamers.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.setText(statistic.getAllGamers());
             }
         });
     }

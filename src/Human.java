@@ -20,4 +20,9 @@ public class Human extends Player {
         return move;
     }
 
+    @Override
+    public int compareTo(Object o) {
+        Player player = (Player)o;
+        return this.getName().compareTo(player.getName());
+    }
 }

@@ -86,6 +86,7 @@ public class Board2 {
         //System.out.println("TestCounter:"+counter);
         if (counter == 9) {
             drow = true;
+            deowAddStatistic(statistic);
             return true;
 
         }
@@ -134,6 +135,13 @@ public class Board2 {
     public void winAndAddStatistic(Statistic statistic) {
         GameResult resultWinner = new GameResult(winner, "winner");
         GameResult resultLooser = new GameResult(looser, "looser");
+        statistic.addResult(resultWinner);
+        statistic.addResult(resultLooser);
+    }
+
+    public void deowAddStatistic(Statistic statistic) {
+        GameResult resultWinner = new GameResult(playerX, "Drow");
+        GameResult resultLooser = new GameResult(player0, "Drow");
         statistic.addResult(resultWinner);
         statistic.addResult(resultLooser);
     }

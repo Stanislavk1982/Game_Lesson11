@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class GameResult {
+public class GameResult implements Comparable{
     private Player player;
     private String result;
     private Date date;
@@ -21,7 +21,7 @@ public class GameResult {
     }
 
     public String toString() {
-        return player.toString() + " " + date.toString();
+        return player.toString() + " -  " + result + " - " + date.toString() ;
     }
 
     public boolean equals(Object obj) {
@@ -34,10 +34,15 @@ public class GameResult {
 
         GameResult gameResult = (GameResult) obj;
 
-        if (this.player.equals(gameResult.player) && this.result.equals(gameResult.result))
-        {
+        if (this.player.equals(gameResult.player) && this.result.equals(gameResult.result)) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        GameResult gameResult = (GameResult)o;
+        return this.result.compareTo(gameResult.result);
     }
 }
